@@ -6,17 +6,15 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/cors"
-	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 
 	docs "SampleGoService/docs"
 	"SampleGoService/src/common"
 	"SampleGoService/src/controllers"
-	"SampleGoService/src/db"
 )
-
 
 func main() {
 	router := gin.Default()
@@ -30,10 +28,10 @@ func main() {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
-	userController := controllers.User { UserDao: &db.User{} }
+	userController := CreateUserController() //  wire.Build(NewTaskController, NewUserController,) controllers.UserController{ UserDao: &db.UserDao{} }
 	userController.RegisterController(router)
 
-	taskController := controllers.Task {}
+	taskController := controllers.TaskController{}
 	taskController.RegisterController(router)
 
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))

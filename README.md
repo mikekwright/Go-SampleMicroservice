@@ -12,6 +12,10 @@ which can be installed as a dependency.
 
     go install github.com/swaggo/swag/cmd/swag@latest
 
+### Install Wire for dependency injection
+
+    go install github.com/google/wire/cmd/wire@latest
+
 Running
 ------------------------------------
 

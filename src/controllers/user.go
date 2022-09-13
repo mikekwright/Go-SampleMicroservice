@@ -9,11 +9,15 @@ import (
 	"SampleGoService/src/models"
 )
 
-type User struct {
-	UserDao *db.User
+type UserController struct {
+	UserDao db.UserDao
 }
 
-func (controller User) RegisterController(router *gin.Engine) {
+func NewUserController(userDao db.UserDao) UserController {
+	return UserController{UserDao: userDao}
+}
+
+func (controller UserController) RegisterController(router *gin.Engine) {
 	router.GET("/user", controller.getUsers)
 }
 
@@ -28,7 +32,7 @@ func (controller User) RegisterController(router *gin.Engine) {
 // @Produce json
 // @Success 200 {object} []models.User
 // @Router /user [get]
-func (controller User) getUsers(c *gin.Context) {
+func (controller UserController) getUsers(c *gin.Context) {
 	endpointUsers := []*models.User{}
 
 	for _, userEntity := range controller.UserDao.FindAllUsers() {

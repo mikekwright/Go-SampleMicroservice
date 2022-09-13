@@ -1,3 +1,5 @@
+.PHONY: build run test build-docker run-docker generate-swag generate-wire
+
 build:
 	go build -o ./build ./src
 
@@ -15,3 +17,6 @@ run-docker:
 
 generate-swag:
 	${GOBIN}/swag init -d ./src/
+
+generate-wire:
+	${GOBIN}/wire

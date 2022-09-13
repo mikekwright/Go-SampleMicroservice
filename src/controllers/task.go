@@ -8,10 +8,14 @@ import (
 	"SampleGoService/src/models"
 )
 
-type Task struct {
+type TaskController struct {
 }
 
-func (controller Task) RegisterController(router *gin.Engine) {
+func NewTaskController() *TaskController {
+	return &TaskController{}
+}
+
+func (controller TaskController) RegisterController(router *gin.Engine) {
 	router.GET("/task", controller.getAllTasks)
 }
 
@@ -26,11 +30,11 @@ func (controller Task) RegisterController(router *gin.Engine) {
 // @Produce json
 // @Success 200 {object} []models.Task
 // @Router /task [get]
-func (controller Task) getAllTasks(c *gin.Context) {
+func (controller TaskController) getAllTasks(c *gin.Context) {
 	c.JSON(http.StatusOK, []models.Task{
-		{TaskId: 1, TaskName: "Task 1", Description: "Test Description", IsComplete: true},
-		{TaskId: 2, TaskName: "Task 2", Description: "Test Description", IsComplete: false},
-		{TaskId: 3, TaskName: "Task 3", Description: "Test Description", IsComplete: false},
-		{TaskId: 4, TaskName: "Task 4", Description: "Test Description", IsComplete: true},
+		{TaskId: 1, TaskName: "TaskController 1", Description: "Test Description", IsComplete: true},
+		{TaskId: 2, TaskName: "TaskController 2", Description: "Test Description", IsComplete: false},
+		{TaskId: 3, TaskName: "TaskController 3", Description: "Test Description", IsComplete: false},
+		{TaskId: 4, TaskName: "TaskController 4", Description: "Test Description", IsComplete: true},
 	})
 }

@@ -1,6 +1,6 @@
 package entity
 
-type User struct {
+type UserEntity struct {
 	UserId int32
 	Name string
 	Email string
